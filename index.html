@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="hop">
+<head>
+  <meta charset="utf-8"> <!-- set character encoding for the document -->
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Hop</title>
+  <link rel="stylesheet" href="lib/public/assets/dist/css/semantic.css" />
+  <link id="apiRoot" href="http://mini.dev:5000/"/>
+  <!-- <base href=""> -->
+</head>
+<body>
+  <div id="fb-root"></div>
+  <header class="ui fixed inverted main menu massive"  style="-webkit-app-region: drag">
+    <div class="ui container">
+      <a ui-sref="home" class="header item" ng-cloak>{{ config.app.name || 'Hop' }}</a>
+      <div class="ui menu inverted">
+        <a ui-sref="brews" class="item">🍻</a>
+        <a ui-sref="my" ng-show="user" ng-cloak class="item">👽</a>
+        <a ui-sref="scan" ng-show="user" ng-cloak class="item">Scan</a>
+      </div>
+      <nav class="ui menu inverted right" ng-hide="user" ng-cloak>
+        <a class="item" ui-sref="home">Login</a>
+        <a class="item" ui-sref="register">Join the Club</a>
+      </nav>
+      <nav class="ui menu inverted right" ng-show="user" ng-cloak>
+        <a ui-sref="admin" class="item">Admin</a>
+        <a class="item" ui-sref="logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  We are using Node.js <script>document.write(process.versions.node)</script>,
+  Chromium <script>document.write(process.versions.chrome)</script>,
+  and Electron <script>document.write(process.versions.electron)</script>.
+
+  <div ng-controller="mainController" class="ui main container">
+    <div class="connection animated bounceInUp" ng-if="connection" ng-cloak>{{connection}}</div>
+    <div ui-view="main"></div>
+  </div>
+
+
+
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=googleAsyncInit" async defer></script>
+  <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="lib/public/node_modules/localforage/dist/localforage.min.js"></script>
+  <script src="lib/public/assets/dist/js/selectize.min.js"></script>
+  <script src="lib/public/assets/dist/js/sweetalert.min.js"></script>
+
+  <script>if (window.module) module = window.module;</script>
+
+  <script src="lib/public/assets/dist/js/app.js"></script>
+  <script src="lib/public/app/init.js"></script>
+
+  <script src="lib/public/app/services.auth.js"></script>
+  <script src="lib/public/app/services.api.js"></script>
+  <script src="lib/public/app/services.config.js"></script>
+  <script src="lib/public/app/services.brews.js"></script>
+  <script src="lib/public/app/services.files.js"></script>
+  <script src="lib/public/app/controllers.js"></script>
+  <script src="lib/public/app/controllers.my.js"></script>
+  <script src="lib/public/app/controllers.brews.js"></script>
+  <script src="lib/public/app/controllers.account.js"></script>
+  <script src="lib/public/app/controllers.admin.js"></script>
+  <script src="lib/public/app/controllers.admin.brews.js"></script>
+  <script src="lib/public/app/controllers.admin.config.js"></script>
+</body>
+</html>
